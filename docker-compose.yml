@@ -12,6 +12,16 @@ services:
       - NODE_ENV=${NODE_ENV}
     depends_on:
       - db
+  frontend:
+    container_name: loja-frontend
+    build:
+      context: ./frontend
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=${NODE_ENV}  
   db:
     container_name: loja-db
     image: mysql:8

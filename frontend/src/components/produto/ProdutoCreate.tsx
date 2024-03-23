@@ -1,0 +1,27 @@
+import api from '@/utils/api';
+import { useRouter } from 'next/router';
+import React, { FormEvent } from 'react';
+import ProdutoForm from './ProdutoForm';
+import { CreateProdutoDto } from '@/types/produto';
+
+function ProdutoCreate() {
+  const router = useRouter();
+
+  const handleSubmit = (produto: CreateProdutoDto) => {
+    api
+      .post('/produto', produto)
+      .then(() => {
+        router.push('/produto');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <div>
+      <h2>Criação de Produto</h2>
+      <ProdutoForm handleSubmit={handleSubmit} />
+    </div>
+  );
+}
+
+export default ProdutoCreate;
